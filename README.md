@@ -39,6 +39,43 @@ Key analytical goals include:
 
 ---
 
+## 🧩 Database Schema (ER Diagram)
+
+```mermaid
+%%{init: {'er': {'layoutDirection': 'LR'}}}%%
+erDiagram
+    ORDERS {
+        int order_id PK
+        date order_date
+        time order_time
+    }
+    ORDER_DETAILS {
+        int order_details_id PK
+        int order_id FK
+        varchar pizza_id
+        int quantity
+    }
+    PIZZAS {
+        varchar pizza_id PK
+        varchar pizza_type_id FK
+        char size
+        decimal price
+    }
+    PIZZA_TYPES {
+        varchar pizza_type_id PK
+        varchar name
+        varchar category
+        text ingredients
+    }
+
+    ORDERS ||--o{ ORDER_DETAILS : contains
+    ORDER_DETAILS }o--|| PIZZAS : refers_to
+    PIZZAS }o--|| PIZZA_TYPES : categorized_as
+
+```
+
+
+---
 ## 📊 Key Insights
 
 - Total orders placed and total revenue generated  
